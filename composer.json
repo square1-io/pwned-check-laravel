@@ -1,0 +1,36 @@
+{
+    "name": "square1/pwned-check-laravel",
+    "description": "Validate password changes against known-compromised passwords",
+    "type": "library",
+    "keywords": [
+        "square1",
+        "pwned-check",
+        "password",
+        "security",
+        "laravel"
+    ],
+    "homepage": "https://github.com/square1-io/pwned-check-laravel",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Paul Conroy",
+            "email": "paul@square1.io"
+        }
+    ],
+    "autoload": {
+        "psr-4": {
+            "Square1\\Laravel\\PwnedCheck\\": "src"
+        }
+    },
+    "require": {
+        "php": ">=7.0.0",
+        "square1/pwned-check": "^1.0"
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Square1\\Laravel\\PwnedCheck\\Providers\\PwnedCheckServiceProvider"
+            ]
+        }
+    }
+}
