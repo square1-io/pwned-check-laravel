@@ -1,9 +1,5 @@
 <?php
 
-// @TODO:
-// * Readme
-// * Auto-registration
-
 namespace Square1\Laravel\PwnedCheck\Validator;
 
 use Exception;
