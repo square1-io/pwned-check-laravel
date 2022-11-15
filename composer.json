@@ -23,8 +23,8 @@
         }
     },
     "require": {
-        "php": ">=7.0.0",
-        "square1/pwned-check": "^1.1"
+        "php": ">=7.0",
+        "square1/pwned-check": "^1.2"
     },
     "extra": {
         "laravel": {
