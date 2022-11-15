@@ -3,8 +3,8 @@
 namespace Square1\Laravel\PwnedCheck\Validator;
 
 use Exception;
+use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Lang;
-use Illuminate\Support\Facades\Cache;
 use Illuminate\Contracts\Validation\Rule;
 use Square1\Laravel\PwnedCheck\PwnedCheck;
 use Square1\Pwned\Exception\GeneralException;
@@ -40,7 +40,7 @@ class Pwned implements Rule
     public function validate($attribute, $value, $parameters)
     {
         // User may have passed minimum occurrence setting as param to rule
-        $this->minimum = array_get($parameters, 0, 1);
+        $this->minimum = Arr::get($parameters, 0, 1);
 
         // Call api
         return $this->passes($attribute, $value);
@@ -93,7 +93,7 @@ class Pwned implements Rule
      */
     public function handleRemoteServiceFailure($exception)
     {
-        $this->log($e->getMessage());
+        $this->log($exception->getMessage());
 
         // Has the user chosen to accept this failure as a blocking failure, or ignore it?
         if (config('pwned-check.fail_on_timeout')) {
