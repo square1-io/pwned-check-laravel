@@ -52,20 +52,18 @@ A number of configuration options are available to modify the behaviour of the c
 ## Usage
 
 ``` php
-    // RegisterController.php
-    protected function validator(array $data)
+    // RegisteredUserController.php
+    public function store(Request $request)
     {
-        return Validator::make($data, [
-            'name' => 'required|string|max:255',
-            'email' => 'required|string|email|max:255|unique:users',
-            // Reject any password that has appeared in the list of compromised ones
-            'password' => 'required|string|min:6|confirmed|pwned',
+        $request->validate([
+            'name' => ['required', 'string', 'max:255'],
+            'email' => ['required', 'string', 'email', 'max:255', 'unique:'.User::class],
+            'password' => ['required', 'confirmed', Rules\Password::defaults(), 'pwned'],
         ]);
-    }
 
     // ...
     // Reject any password that has appeared in the list of compromised ones more than ten times
-    'password' => 'required|string|min:6|confirmed|pwned:10',
+    'password' => ['required', 'confirmed', Rules\Password::defaults(), 'pwned:10'],
 
 ```
 
@@ -74,7 +72,7 @@ A number of configuration options are available to modify the behaviour of the c
 
 ### How do I set the validation error message shown?
 
-In the `resources/lang/{LANG}/validation` for each language your app runs in, the message can be set within the `custom` array:
+In the `lang/{LANG}/validation` for each language your app runs in, the message can be set within the `custom` array:
 
 ```
     'custom' => [
